@@ -57,7 +57,7 @@ def lineSquare(leftMotor = LargeMotor(OUTPUT_A),
     colorRight.mode = 'COL-REFLECT'
     
     counter = 0
-    while counter < 2:
+    while counter < 2 and False == Constants.STOP:
         while colorLeft.reflected_light_intensity >= Constants.BLACK and colorRight.reflected_light_intensity >= Constants.BLACK and False == Constants.STOP:
             robot.on(steering = 0, speed = 10)
         robot.off()
