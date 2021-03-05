@@ -6,9 +6,10 @@ from ev3dev2.sensor.lego import ColorSensor, GyroSensor
 from time import sleep, time
 import math
 from BasicFunctions import *
+import Constants
+from sys import stderr
 # from ev3dev.ev3 import *
 # import ev3dev.fonts as fonts
-
 
 robot = MoveSteering(OUTPUT_A, OUTPUT_B)
 colorLeft = ColorSensor(INPUT_1)
@@ -17,26 +18,31 @@ motorA = LargeMotor(OUTPUT_A)
 motorD = LargeMotor(OUTPUT_D)
 motorC = LargeMotor(OUTPUT_C)
 
-
 motorC.off(brake=True)
 motorD.off(brake=True)
 
+Constants.STOP = False
+
+GyroDrift()
+
+show_text("Robot Run 2")
 
 acceleration(degrees=DistanceToDegree(70), finalSpeed=50, steering=2)
-while colorLeft.reflected_light_intensity > 10:
+while colorLeft.reflected_light_intensity > 10 and False == Constants.STOP:
     robot.on(steering=2, speed=20)
 robot.off()
 
 acceleration(degrees=DistanceToDegree(13), finalSpeed=20, steering=2)
 
-while colorLeft.reflected_light_intensity < WHITE:
+while colorLeft.reflected_light_intensity < Constants.WHITE and False == Constants.STOP:
     #robot.on_for_degrees(speed=20, steering = 0, degrees = DistanceToDegree(2))
+    #print("RobotRun2 stop=" + str(Constants.STOP), file=stderr)
     MoveForwardWhite(distanceInCm=2)
     robot.on_for_degrees(degrees=DistanceToDegree(0.75), steering=2, speed=-10)
 robot.off()
 
 counter = 0
-while counter < 5:
+while counter < 5 and False == Constants.STOP:
     robot.on_for_degrees(speed=20, steering = 0, degrees = DistanceToDegree(2))
     robot.on_for_degrees(degrees=DistanceToDegree(0.75), steering=2, speed=-10)
     counter += 1
@@ -103,8 +109,6 @@ accelerationMoveBackward(degrees=DistanceToDegree(10), finalSpeed=10)
 
 GyroTurn(angle=40, steering=-50)
 acceleration(degrees=DistanceToDegree(70), finalSpeed=100)
+motorC.off(brake=False)
+motorD.off(brake=False)
 
-
-#lineFollowRightPID(degrees=DistanceToDegree(25), kp = 1.25, ki = 0.01, kd = 5)
-#GyroTurn(steering=-40, angle=30)
-#acceleration(DistanceToDegree(100), finalSpeed=50)

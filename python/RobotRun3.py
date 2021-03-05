@@ -18,6 +18,9 @@ motorB = LargeMotor(OUTPUT_B)
 
 gyro.reset()
 
+GyroDrift()
+
+show_text("Robot Run 3")
 
 GyroTurn(steering=-50, angle=5)
 acceleration(degrees=DistanceToDegree(20), finalSpeed=30)
