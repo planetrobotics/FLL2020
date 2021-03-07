@@ -6,9 +6,12 @@ from ev3dev2.sensor.lego import ColorSensor, GyroSensor
 from time import sleep, time
 import math
 from BasicFunctions import *
+from threading import Thread
 
-lineFollowPID(degrees =  DistanceToDegree(150), kp = 0.75, ki = 0.01, kd = 20, color = ColorSensor(INPUT_3))
 
-acceleration(degrees = DistanceToDegree(55), finalSpeed=50)
-accelerationMoveBackward(degrees=DistanceToDegree(55), finalSpeed=50)
+while True:
+    acceleration(finalSpeed=20, degrees=DistanceToDegree(10))
+    GyroTurn(angle=90, steering=50)
+
+
 

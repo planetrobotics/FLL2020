@@ -48,43 +48,42 @@ while counter < 5 and False == Constants.STOP:
     counter += 1
 robot.off()
 
-robot.on_for_degrees(degrees=DistanceToDegree(10), steering=-30, speed=-20)
+accelerationMoveBackward(degrees=DistanceToDegree(10), steering=-15, finalSpeed=-20)
 GyroTurn(steering=-100, angle=40)
-acceleration(degrees=DistanceToDegree(10), finalSpeed=20)
-GyroTurn(steering=-100, angle=40)
+acceleration(degrees=DistanceToDegree(10.5), finalSpeed=20)
+while colorRight.reflected_light_intensity < Constants.WHITE and False == Constants.STOP:
+    robot.on(speed=10, steering=0)
+robot.off()
+acceleration(degrees=DistanceToDegree(2), finalSpeed=20)
+GyroTurn(steering=-100, angle=45)
 
 # wall square
 robot.on_for_seconds(steering=5, speed=-10, seconds=2)
 
 acceleration(degrees=DistanceToDegree(55), finalSpeed=30, steering=1)
-
-# while colorRight.reflected_light_intensity < 50:
-#     robot.on(steering=50, speed=10)
-# robot.off()
-
 #lineFollowPID(degrees=DistanceToDegree(40), kp=1.25, ki=0.01, kd=5, color=ColorSensor(INPUT_3))
 lineSquare()
 
 acceleration(degrees=DistanceToDegree(20), finalSpeed=30, steering=-2)
-motorC.on_for_seconds(speed=-30, seconds=0.2, brake=False)
-motorC.on_for_degrees(speed=30, degrees=5, brake=True)
-accelerationMoveBackward(degrees=DistanceToDegree(22), finalSpeed=30)
+motorC.on_for_seconds(speed=-20, seconds=0.5, brake=False)
+motorC.on_for_degrees(speed=20, degrees=7, brake=True)
+accelerationMoveBackward(degrees=DistanceToDegree(20), finalSpeed=30)
+
 lineSquare()
-GyroTurn(steering=-45, angle=95)
 
-motorC.on_for_seconds(speed=-5, seconds=0.1, brake=False)
-acceleration(degrees=DistanceToDegree(4), finalSpeed=10)
-GyroTurn(steering=-50, angle=13)
-
+GyroTurn(steering=-45, angle=85)
+acceleration(degrees=DistanceToDegree(3.5), finalSpeed=10)
+GyroTurn(steering=-50, angle=15)
 acceleration(degrees=DistanceToDegree(5), finalSpeed=10)
-
-accelerationMoveBackward(degrees=DistanceToDegree(1), finalSpeed=10)
+accelerationMoveBackward(degrees=DistanceToDegree(1.5), finalSpeed=10)
 motorC.on_for_seconds(speed=10, seconds=0.5, brake=True)
 acceleration(degrees=DistanceToDegree(2), finalSpeed=10)
 motorC.on_for_seconds(speed=10, seconds=0.2, brake=False)
 acceleration(degrees=DistanceToDegree(7), finalSpeed=10)
 
 motorC.on_for_seconds(speed=10, seconds=0.2, brake=True)
+
+exit()
 
 accelerationMoveBackward(degrees=DistanceToDegree(2), finalSpeed=30)
 GyroTurn(steering=100, angle=35)

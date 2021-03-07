@@ -15,12 +15,12 @@ def wait_stop_thread():
     global STOP
     sound = Sound()
     while True:
-        print(btn.buttons_pressed)
-        if btn.any():
-            STOP = True
-            print("STOPPING...", file=stderr)
-            sound.beep()
+        btn.wait_for_bump('left')
+        STOP = True
+        print("STOPPING...", file=stderr)
+        sound.beep()
         sleep(1)
+
 
 
 

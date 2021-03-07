@@ -33,6 +33,7 @@ def GyroDrift(gyro=GyroSensor(INPUT_2)):
         show_text("Gyro drift rate: " + str(gyro.rate))
         sound.beep()
         sleep(0.5)
+    gyro.mode='GYRO-ANG'
 
 def GyroTurn(steering, angle, gyro = GyroSensor(INPUT_2), steer_pair = MoveSteering(OUTPUT_A, OUTPUT_B)):
     """Function to do precise turns using gyro sensor
@@ -47,6 +48,17 @@ def GyroTurn(steering, angle, gyro = GyroSensor(INPUT_2), steer_pair = MoveSteer
     gyro.wait_until_angle_changed_by(abs(angle))
     steer_pair.off()
 
+def MoveLeftMotor(leftMotor = LargeMotor(OUTPUT_A), colorLeft = ColorSensor(INPUT_1)):
+    while colorLeft.reflected_light_intensity > Constants.BLACK and False == Constants.STOP:
+        leftMotor.on(speed=10)
+    leftMotor.off()
+
+
+def MoveRightMotor(rightMotor = LargeMotor(OUTPUT_B), colorRight = ColorSensor(INPUT_3)):
+    while colorRight.reflected_light_intensity > Constants.BLACK and False == Constants.STOP:
+        rightMotor.on(speed=10)
+    rightMotor.off()
+
 def lineSquare(leftMotor = LargeMotor(OUTPUT_A), 
             rightMotor = LargeMotor(OUTPUT_B), 
             robot = MoveSteering(OUTPUT_A, OUTPUT_B), 
@@ -58,27 +70,15 @@ def lineSquare(leftMotor = LargeMotor(OUTPUT_A),
     
     counter = 0
     while counter < 2 and False == Constants.STOP:
-        while colorLeft.reflected_light_intensity >= Constants.BLACK and colorRight.reflected_light_intensity >= Constants.BLACK and False == Constants.STOP:
-            robot.on(steering = 0, speed = 10)
-        robot.off()
-
-        while colorLeft.reflected_light_intensity <= Constants.WHITE and False == Constants.STOP:
-            leftMotor.on(speed=-10)
-        leftMotor.off()
-
-        while colorRight.reflected_light_intensity <= Constants.WHITE and False == Constants.STOP:
-            rightMotor.on(speed=-10)
-        rightMotor.off()
-
-        while colorLeft.reflected_light_intensity >= Constants.BLACK and False == Constants.STOP:
-            leftMotor.on(speed=10)
-        leftMotor.off()
-
-        while colorRight.reflected_light_intensity >= Constants.BLACK and False == Constants.STOP:
-            rightMotor.on(speed=10)
-        rightMotor.off()
-
+        left = Thread(target=MoveLeftMotor)
+        right = Thread(target=MoveRightMotor)
+        left.start()
+        right.start()
+        left.join()
+        right.join()
+        accelerationMoveBackward(steering=0, finalSpeed=20, degrees=DistanceToDegree(1))
         counter += 1
+
 
 def PIDMath(error, lasterror, kp = 1, ki = 0, kd = 0):
     Proportional = error * kp

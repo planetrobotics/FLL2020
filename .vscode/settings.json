@@ -2,5 +2,8 @@
     "python.linting.pylintArgs": [
         "--disable=all",
         "--enable=F,E,unreachable,duplicate-key,unnecessary-semicolon,global-variable-not-assigned,unused-variable,binary-op-exception,bad-format-string,anomalous-backslash-in-string,bad-open-mode",
-        "--init-hook"]
+        "--init-hook",
+        "import sys; sys.path.extend([\"\"c:\\\\Users\\\\Coachy-Roachy\\\\.vscode\\\\extensions\\\\ms-python.devicesimulatorexpress-2020.0.36321\\\\out\"\",\"\"c:\\\\Users\\\\Coachy-Roachy\\\\.vscode\\\\extensions\\\\ms-python.devicesimulatorexpress-2020.0.36321\\\\out\\\\micropython\"\",\"\"c:\\\\Users\\\\Coachy-Roachy\\\\.vscode\\\\extensions\\\\ms-python.devicesimulatorexpress-2020.0.36321\\\\out\\\\clue\"\",\"\"c:\\\\Users\\\\Coachy-Roachy\\\\.vscode\\\\extensions\\\\ms-python.devicesimulatorexpress-2020.0.36321\\\\out\\\\base_circuitpython\"\"])"
+    ],
+    "python.pythonPath": "c:\\Users\\Coachy-Roachy\\.vscode\\extensions\\ms-python.devicesimulatorexpress-2020.0.36321\\venv\\Scripts\\python.exe"
 }
