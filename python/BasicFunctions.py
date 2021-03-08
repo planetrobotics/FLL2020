@@ -15,6 +15,7 @@ from time import sleep, time
 import math
 from sys import stderr
 
+# Function to stop the robot during testing on ssh terminal
 def stopRobot():
     robot = MoveSteering(OUTPUT_A, OUTPUT_B)
     robot.off()
