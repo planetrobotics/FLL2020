@@ -220,6 +220,4 @@ def show_text(string, font_name='courB24', font_width=15, font_height=24):
         lcd.text_pixels(strings[i], False, x_val, y_val, font=font_name)
     lcd.update()
 
-stop_th = Thread(target=Constants.wait_stop_thread)
-stop_th.setDaemon(True)
-stop_th.start()
+

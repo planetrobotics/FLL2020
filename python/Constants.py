@@ -21,7 +21,9 @@ def wait_stop_thread():
         sound.beep()
         sleep(1)
 
-
+stop_th = Thread(target=wait_stop_thread)
+stop_th.setDaemon(True)
+stop_th.start()
 
 
 
