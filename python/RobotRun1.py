@@ -7,6 +7,7 @@ from time import sleep, time
 import math
 from BasicFunctions import *
 
+#robot accelerates forward turns left and right then accelerates back to base
 
 acceleration(degrees = DistanceToDegree(55), finalSpeed=80)
 GyroTurn(steering=-100, angle=20)
