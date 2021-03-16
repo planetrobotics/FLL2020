@@ -27,6 +27,8 @@ GyroDrift()
 
 show_text("Robot Run 2")
 
+# acceleration to step counter
+
 acceleration(degrees=DistanceToDegree(70), finalSpeed=50, steering=2)
 while colorLeft.reflected_light_intensity > 10 and False == Constants.STOP:
     robot.on(steering=2, speed=20)
@@ -41,12 +43,17 @@ while colorLeft.reflected_light_intensity < Constants.WHITE and False == Constan
     robot.on_for_degrees(degrees=DistanceToDegree(0.75), steering=2, speed=-10)
 robot.off()
 
+# accelerating back and forth to solve step counter
+
+
 counter = 0
 while counter < 5 and False == Constants.STOP:
     robot.on_for_degrees(speed=20, steering = 0, degrees = DistanceToDegree(2))
     robot.on_for_degrees(degrees=DistanceToDegree(0.75), steering=2, speed=-10)
     counter += 1
 robot.off()
+
+#getting away from stepcounter 
 
 accelerationMoveBackward(degrees=DistanceToDegree(10), steering=-15, finalSpeed=-20)
 GyroTurn(steering=-100, angle=40)
@@ -60,10 +67,13 @@ GyroTurn(steering=-100, angle=45)
 # wall square
 robot.on_for_seconds(steering=5, speed=-10, seconds=2)
 
+# going under the pull 
 acceleration(degrees=DistanceToDegree(55), finalSpeed=30, steering=1)
 #lineFollowPID(degrees=DistanceToDegree(40), kp=1.25, ki=0.01, kd=5, color=ColorSensor(INPUT_3))
 lineSquare()
 
+
+#lowering and lifting left for boccia
 acceleration(degrees=DistanceToDegree(20), finalSpeed=30, steering=-2)
 motorC.on_for_seconds(speed=-20, seconds=0.5, brake=False)
 motorC.on_for_degrees(speed=20, degrees=7, brake=True)
@@ -71,6 +81,7 @@ accelerationMoveBackward(degrees=DistanceToDegree(20), finalSpeed=30)
 
 lineSquare()
 
+#navigating to and solving the slide
 GyroTurn(steering=-45, angle=85)
 acceleration(degrees=DistanceToDegree(3.5), finalSpeed=10)
 GyroTurn(steering=-50, angle=15)
@@ -85,6 +96,7 @@ motorC.on_for_seconds(speed=10, seconds=0.2, brake=True)
 
 exit()
 
+# unfinalized code for getting away from slide and doing basketball
 accelerationMoveBackward(degrees=DistanceToDegree(2), finalSpeed=30)
 GyroTurn(steering=100, angle=35)
 
