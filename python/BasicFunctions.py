@@ -154,18 +154,17 @@ def acceleration(degrees, finalSpeed, steering = 0, robot = MoveSteering(OUTPUT_
     motorA.reset() #reseting how many degrees the robot has moved
     motorA.position = 0 # setting how many degrees the robot has moved
 
-    
     accelerateDegree = degrees * 0.8
     # declerationDegree = degrees * 0.2'
     speed = 0 #starting speed
-    while motorA.position < degrees and False == Constants.STOP:
-        if motorA.position < accelerateDegree and False == Constants.STOP:
-            if speed < finalSpeed:
-                speed += 5
-                robot.on(steering = steering, speed = speed)
-                sleep(0.1)
+    while motorA.position < degrees and False == Constants.STOP: #while the robot hasen't moved the target amount of degree's(distance)
+        if motorA.position < accelerateDegree and False == Constants.STOP: 
+            if speed < finalSpeed: # while the robot hasen't accelerated to the target speed
+                speed += 5 #speed up
+                robot.on(steering = steering, speed = speed) # Start Moving
+                sleep(0.1) #wait so that it doesn't accelerate immidiatly
             else:
-                robot.on(steering = steering, speed = finalSpeed)
+                robot.on(steering = steering, speed = finalSpeed)# otherwise just keep moving
                 sleep(0.01)
         elif False == Constants.STOP:
             if speed > 10:
@@ -176,7 +175,7 @@ def acceleration(degrees, finalSpeed, steering = 0, robot = MoveSteering(OUTPUT_
                 robot.on(steering = steering, speed = speed)
                 sleep(0.01)
     
-    robot.off()
+    robot.off() # Stop Moving
 
 
 
