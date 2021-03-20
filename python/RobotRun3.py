@@ -35,8 +35,10 @@ acceleration(degrees=DistanceToDegree(26), finalSpeed=50, steering=3)
 motorB.on_for_seconds(speed=15, seconds=10)
 
 accelerationMoveBackward(degrees = DistanceToDegree(10), finalSpeed=20, steering=0)
+GyroTurn(steering=-50, angle=90)
+robot.on_for_seconds(steering=0, speed=-10, seconds=2)
 
-accelerationMoveBackward(degrees = DistanceToDegree(200), finalSpeed=100, steering=1)
-
+#accelerationMoveBackward(degrees = DistanceToDegree(200), finalSpeed=100, steering=1)
+acceleration(degrees=DistanceToDegree(26), finalSpeed=50, steering=0)
 
 

@@ -59,46 +59,46 @@ def MoveLeftMotor(leftMotor = LargeMotor(OUTPUT_A), colorLeft = ColorSensor(INPU
     leftMotor.off() #Turning off motor because it reached it's goal
 
 
-def MoveRightMotor(rightMotor = LargeMotor(OUTPUT_B), colorRight = ColorSensor(INPUT_3)): #
-    while colorRight.reflected_light_intensity > Constants.BLACK and False == Constants.STOP:
-        rightMotor.on(speed=10)
-    rightMotor.off()
+def MoveRightMotor(rightMotor = LargeMotor(OUTPUT_B), colorRight = ColorSensor(INPUT_3)): #Function for moving the right motor for our linesquare
+    while colorRight.reflected_light_intensity > Constants.BLACK and False == Constants.STOP: #while loop for moving until it reaches the black line
+        rightMotor.on(speed=10) #moving until it reaches the black line
+    rightMotor.off() #Turning off motor because it reached it's goal
 
 def lineSquare(leftMotor = LargeMotor(OUTPUT_A), 
             rightMotor = LargeMotor(OUTPUT_B), 
             robot = MoveSteering(OUTPUT_A, OUTPUT_B), 
-            colorLeft = ColorSensor(INPUT_1), colorRight = ColorSensor(INPUT_3)):
+            colorLeft = ColorSensor(INPUT_1), colorRight = ColorSensor(INPUT_3)): # look below for what this is doing
     '''Function to square the robot precisely on a black line'''
     if True == Constants.STOP: return
-    colorLeft.mode = 'COL-REFLECT'
-    colorRight.mode = 'COL-REFLECT'
+    colorLeft.mode = 'COL-REFLECT' #setting colorsenso mode
+    colorRight.mode = 'COL-REFLECT' #setting colorsensor mode
     
-    counter = 0
-    while counter < 2 and False == Constants.STOP:
+    counter = 0 # setting that we've linesquared 0 times so far
+    while counter < 2 and False == Constants.STOP: # linesquare 2 times
         left = Thread(target=MoveLeftMotor)
-        right = Thread(target=MoveRightMotor)
-        left.start()
-        right.start()
+        right = Thread(target=MoveRightMotor) # Linesquare left and right motor at the same time using thread 
+        left.start() #starting the Thread
+        right.start() # starting the Thread
         left.join()
         right.join()
-        accelerationMoveBackward(steering=0, finalSpeed=20, degrees=DistanceToDegree(1))
+        accelerationMoveBackward(steering=0, finalSpeed=20, degrees=DistanceToDegree(1)) # move backward so we can do it again for extra precision
         counter += 1
 
 
-def PIDMath(error, lasterror, kp = 1, ki = 0, kd = 0):
-    Proportional = error * kp
-    Integral = (error + lasterror) * ki
-    Derivative = (error - lasterror) * kd
-    PID = Proportional + Integral + Derivative
-    return PID
+def PIDMath(error, lasterror, kp = 1, ki = 0, kd = 0): # PID math function that we use for PID linefollower
+    Proportional = error * kp #Proportional value
+    Integral = (error + lasterror) * ki #Integeral math
+    Derivative = (error - lasterror) * kd #Derivative Math
+    PID = Proportional + Integral + Derivative #Final PID value calculation
+    return PID # return the final value
 
 def lineFollowTillIntersectionPID(kp = 1.0, ki = 0, kd = 0, color = ColorSensor(INPUT_1), color2 = ColorSensor(INPUT_3), 
                             robot = MoveSteering(OUTPUT_A, OUTPUT_B)):
-    """Function to follow a line till it encounters intersection"""
+    """Function to follow a line till it encounters intersection""" # *an intersection is a line that is going through the line that the robot is following
     
-    color.mode = 'COL-REFLECT'
-    color2.mode = 'COL-REFLECT'
-    lasterror = 0
+    color.mode = 'COL-REFLECT' #setting color mode
+    color2.mode = 'COL-REFLECT' #setting color mode
+    lasterror = 0 
     while color2.reflected_light_intensity <= Constants.WHITE and False == Constants.STOP:
         error = color.reflected_light_intensity - ((Constants.WHITE + Constants.BLACK)/2)  # colorLeft.reflected_light_intensity - colorRight.reflected_light_intensity
         # correction = error * GAIN  # correction = PID(error, lasterror, kp, ki, kd)
@@ -108,14 +108,14 @@ def lineFollowTillIntersectionPID(kp = 1.0, ki = 0, kd = 0, color = ColorSensor(
         robot.on(speed = 20, steering = correction)
         lasterror = error
     robot.off()
-
+#############################################################################################################33
 def lineFollowPID(degrees, kp = 1.0, ki = 0, kd = 0, color = ColorSensor(INPUT_1), 
                 robot = MoveSteering(OUTPUT_A, OUTPUT_B), motorA = LargeMotor(OUTPUT_A)):
     """Function to follow line using color sensor on right side of line"""
 
     color.mode = 'COL-REFLECT'
-    motorA.reset()
-    motorA.position = 0
+    motorA.reset() # Reseting motor degrees
+    motorA.position = 0 # Same thing
 
     lasterror = 0
     while motorA.position < degrees and False == Constants.STOP:
@@ -214,10 +214,10 @@ def MoveForwardBlack(distanceInCm, colorLeft = ColorSensor(INPUT_1), robot = Mov
         robot.on(speed=20, steering = 0)
     robot.off()
 
-def show_text(string, font_name='courB24', font_width=15, font_height=24):
-    lcd = Display()
-    lcd.clear()
-    strings = wrap(string, width=int(180/font_width))
+def show_text(string, font_name='courB24', font_width=15, font_height=24): # A function to show text on the robot's screen 
+    lcd = Display() # Defining screen
+    lcd.clear() # Clearing the screen so there isnt already text
+    strings = wrap(string, width=int(180/font_width)) #
     for i in range(len(strings)):
         x_val = 89-font_width/2*len(strings[i])
         y_val = 63-(font_height+1)*(len(strings)/2-i)
