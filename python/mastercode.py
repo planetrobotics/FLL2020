@@ -22,18 +22,18 @@ sound = Sound()
 
 btn = Button()
 
-show_text("Right = Run 1, Up = Run 2, Bottom = Run 3")
+show_text("Up = Run 1, Right = Run 2, Bottom = Run 3")
 
 while True:
     if btn.check_buttons(buttons=['up']):
         show_text("Currently Running Run 1")
-        robotrunone()
-        show_text("Right = Run 1, Up = Run 2, Bottom = Run 3")
+        Robotrun1()
+        show_text("Up = Run 1, Right = Run 2, Bottom = Run 3")
     if btn.check_buttons(buttons=['right']):
         show_text("Currently Running Run 2")
         Robotrun2()
-        show_text("Right = Run 1, Up = Run 2, Bottom = Run 3")
+        show_text("Up = Run 1, Right = Run 2, Bottom = Run 3")
     if btn.check_buttons(buttons=['down']):
         show_text("Currently Running Run 3")
-        robotrun3
-        show_text("Right = Run 1, Up = Run 2, Bottom = Run 3")
+        Robotrun3()
+        show_text("Up = Run 1, Right = Run 2, Bottom = Run 3")
