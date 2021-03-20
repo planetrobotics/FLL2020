@@ -8,35 +8,35 @@ from ev3dev2.sensor.lego import ColorSensor, GyroSensor
 from time import sleep, time
 import math
 from BasicFunctions import *
+def robotrun3
+    robot = MoveSteering(OUTPUT_A, OUTPUT_B)
+    colorLeft = ColorSensor(INPUT_1)
+    colorRight = ColorSensor(INPUT_3)
+    gyro = GyroSensor(INPUT_2)
 
-robot = MoveSteering(OUTPUT_A, OUTPUT_B)
-colorLeft = ColorSensor(INPUT_1)
-colorRight = ColorSensor(INPUT_3)
-gyro = GyroSensor(INPUT_2)
+    motorB = LargeMotor(OUTPUT_B)
 
-motorB = LargeMotor(OUTPUT_B)
+    gyro.reset()
 
-gyro.reset()
+    GyroDrift()
 
-GyroDrift()
+    show_text("Robot Run 3")
 
-show_text("Robot Run 3")
+    GyroTurn(steering=-50, angle=5)
+    acceleration(degrees=DistanceToDegree(20), finalSpeed=30)
+    lineFollowPID(degrees=DistanceToDegree(80), kp=1.25, ki=0.01, kd=5, color=ColorSensor(INPUT_3))
+    lineFollowTillIntersectionPID(kp=1.25, ki=0.01, kd=5, color=ColorSensor(INPUT_3), color2=ColorSensor(INPUT_1))
+    lineFollowPID(degrees=DistanceToDegree(30), kp=1.25, ki=0.01, kd=5, color=ColorSensor(INPUT_3))
+    lineFollowTillIntersectionPID(kp=1.25, ki=0.01, kd=5, color=ColorSensor(INPUT_3), color2=ColorSensor(INPUT_1))
+    accelerationMoveBackward(degrees = DistanceToDegree(5), finalSpeed=50, steering=0)
 
-GyroTurn(steering=-50, angle=5)
-acceleration(degrees=DistanceToDegree(20), finalSpeed=30)
-lineFollowPID(degrees=DistanceToDegree(80), kp=1.25, ki=0.01, kd=5, color=ColorSensor(INPUT_3))
-lineFollowTillIntersectionPID(kp=1.25, ki=0.01, kd=5, color=ColorSensor(INPUT_3), color2=ColorSensor(INPUT_1))
-lineFollowPID(degrees=DistanceToDegree(30), kp=1.25, ki=0.01, kd=5, color=ColorSensor(INPUT_3))
-lineFollowTillIntersectionPID(kp=1.25, ki=0.01, kd=5, color=ColorSensor(INPUT_3), color2=ColorSensor(INPUT_1))
-accelerationMoveBackward(degrees = DistanceToDegree(5), finalSpeed=50, steering=0)
+    acceleration(degrees=DistanceToDegree(26), finalSpeed=50, steering=3)
 
-acceleration(degrees=DistanceToDegree(26), finalSpeed=50, steering=3)
+    motorB.on_for_seconds(speed=15, seconds=10)
 
-motorB.on_for_seconds(speed=15, seconds=10)
+    accelerationMoveBackward(degrees = DistanceToDegree(10), finalSpeed=20, steering=0)
 
-accelerationMoveBackward(degrees = DistanceToDegree(10), finalSpeed=20, steering=0)
-
-accelerationMoveBackward(degrees = DistanceToDegree(200), finalSpeed=100, steering=1)
+    accelerationMoveBackward(degrees = DistanceToDegree(200), finalSpeed=100, steering=1)
 
 
 

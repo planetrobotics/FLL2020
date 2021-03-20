@@ -10,6 +10,9 @@ import math
 from BasicFunctions import * 
 from ev3dev2.button import Button 
 from ev3dev2.sound import Sound
+from RobotRun1 import *
+from RobotRun2 import *
+from RobotRun3 import *
 #import os
 #os.system('setfont Lat15-TerminusBold14')
 # os.system('setfont Lat15-TerminusBold32x16')
@@ -22,18 +25,15 @@ btn = Button()
 show_text("Right = Run 1, Up = Run 2, Bottom = Run 3")
 
 while True:
-    if btn.check_buttons(buttons=['right']):
-        show_text("Currently Running Run 1")
-        sound.beep()
-        sleep(10)
-        show_text("Right = Run 1, Up = Run 2, Bottom = Run 3")
     if btn.check_buttons(buttons=['up']):
+        show_text("Currently Running Run 1")
+        robotrunone()
+        show_text("Right = Run 1, Up = Run 2, Bottom = Run 3")
+    if btn.check_buttons(buttons=['right']):
         show_text("Currently Running Run 2")
-        sound.beep()
-        sleep(10)
+        Robotrun2()
         show_text("Right = Run 1, Up = Run 2, Bottom = Run 3")
     if btn.check_buttons(buttons=['down']):
         show_text("Currently Running Run 3")
-        sound.beep()
-        sleep(10)
+        robotrun3
         show_text("Right = Run 1, Up = Run 2, Bottom = Run 3")

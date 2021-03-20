@@ -7,8 +7,8 @@ from time import sleep, time
 import math
 from BasicFunctions import *
 
-
-acceleration(degrees = DistanceToDegree(55), finalSpeed=80)
-GyroTurn(steering=-100, angle=20)
-GyroTurn(steering=100, angle=20)
-accelerationMoveBackward(degrees=DistanceToDegree(55), finalSpeed=100)
+def robotrunone():
+    acceleration(degrees = DistanceToDegree(55), finalSpeed=80)
+    GyroTurn(steering=-100, angle=20)
+    GyroTurn(steering=100, angle=20)
+    accelerationMoveBackward(degrees=DistanceToDegree(55), finalSpeed=100)
