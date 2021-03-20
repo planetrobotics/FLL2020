@@ -15,6 +15,7 @@ from ev3dev2.sound import Sound
 # os.system('setfont Lat15-TerminusBold32x16')
 #print("Left = Run 1, Right = Run 2, Up = Run 3")
 
+#sound and button
 sound = Sound()
 btn = Button()
 
