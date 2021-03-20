@@ -25,16 +25,20 @@ def DistanceToDegree(distanceInCm, diameter = 8.16):
         Input distanceInCm = distance to travel in centimeters
         Input diameter = wheel diameter in centimeters, 8.16 is default
     """
-    return distanceInCm * (360 / (math.pi * diameter))
+    return distanceInCm * (360 / (math.pi * diameter)) 
 
 def GyroDrift(gyro=GyroSensor(INPUT_2)):
-    sound = Sound()
-    gyro.mode = 'GYRO-RATE'
-    while math.fabs(gyro.rate) > 0:
-        show_text("Gyro drift rate: " + str(gyro.rate))
-        sound.beep()
-        sleep(0.5)
-    gyro.mode='GYRO-ANG'
+    '''
+    Checking if the Gyro sensor's output is drifing and moving when the actual sensor is not. 
+    we need to do this becuase if the sensor is drifting then our GyroTurn's will not work correctly
+    '''
+    sound = Sound() #Creating sound Shortcut
+    gyro.mode = 'GYRO-RATE' #setting gyro mode
+    while math.fabs(gyro.rate) > 0: #while gyro is drifting loop, if it is not drifting then the loop will not take place
+        show_text("Gyro drift rate: " + str(gyro.rate)) #Showing the rate of how much gyro is drifting
+        sound.beep() # Beep to indicate that it is displaying current value
+        sleep(0.5) #waiting for value to change
+    gyro.mode='GYRO-ANG' #reseting gyro mode for our use in other functions
 
 def GyroTurn(steering, angle, gyro = GyroSensor(INPUT_2), steer_pair = MoveSteering(OUTPUT_A, OUTPUT_B)):
     """Function to do precise turns using gyro sensor
@@ -43,19 +47,19 @@ def GyroTurn(steering, angle, gyro = GyroSensor(INPUT_2), steer_pair = MoveSteer
         steer_pair: MoveSteering if different than default
     """
 
-    if True == Constants.STOP: return
-    gyro.mode='GYRO-ANG'
-    steer_pair.on(steering = steering, speed = 15)
-    gyro.wait_until_angle_changed_by(abs(angle))
-    steer_pair.off()
+    if True == Constants.STOP: return #
+    gyro.mode='GYRO-ANG' #setting gyro value mode
+    steer_pair.on(steering = steering, speed = 15) #starting to turn using MoveSteering. If steering equals 50 then it will do a pivot turn, if it is 100 then it will do a spin turn
+    gyro.wait_until_angle_changed_by(abs(angle)) #keeps turning until the correct angle is reached
+    steer_pair.off() #stopping the turning after target angle is reached
 
-def MoveLeftMotor(leftMotor = LargeMotor(OUTPUT_A), colorLeft = ColorSensor(INPUT_1)):
-    while colorLeft.reflected_light_intensity > Constants.BLACK and False == Constants.STOP:
-        leftMotor.on(speed=10)
-    leftMotor.off()
+def MoveLeftMotor(leftMotor = LargeMotor(OUTPUT_A), colorLeft = ColorSensor(INPUT_1)): # Function for moving the left motor for our linesquare
+    while colorLeft.reflected_light_intensity > Constants.BLACK and False == Constants.STOP: #while loop for moving until it reaches the black line
+        leftMotor.on(speed=10) #moving until it reaches the black line
+    leftMotor.off() #Turning off motor because it reached it's goal
 
 
-def MoveRightMotor(rightMotor = LargeMotor(OUTPUT_B), colorRight = ColorSensor(INPUT_3)):
+def MoveRightMotor(rightMotor = LargeMotor(OUTPUT_B), colorRight = ColorSensor(INPUT_3)): #
     while colorRight.reflected_light_intensity > Constants.BLACK and False == Constants.STOP:
         rightMotor.on(speed=10)
     rightMotor.off()
