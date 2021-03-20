@@ -148,14 +148,16 @@ def lineFollowRightPID(degrees, kp = 1.0, ki = 0, kd = 0, color = ColorSensor(IN
     robot.off()
 
 
-def acceleration(degrees, finalSpeed, steering = 0, robot = MoveSteering(OUTPUT_A, OUTPUT_B), motorA = LargeMotor(OUTPUT_A)):
+def acceleration(degrees, finalSpeed, steering = 0, robot = MoveSteering(OUTPUT_A, OUTPUT_B), motorA = LargeMotor(OUTPUT_A)): # Function to accelerate while moving so the robot can get traction before moving fast
     """Function to accelerate the robot and drive a specific distance"""
 
-    motorA.reset()
-    motorA.position = 0
+    motorA.reset() #reseting how many degrees the robot has moved
+    motorA.position = 0 # setting how many degrees the robot has moved
+
+    
     accelerateDegree = degrees * 0.8
     # declerationDegree = degrees * 0.2'
-    speed = 0
+    speed = 0 #starting speed
     while motorA.position < degrees and False == Constants.STOP:
         if motorA.position < accelerateDegree and False == Constants.STOP:
             if speed < finalSpeed:
