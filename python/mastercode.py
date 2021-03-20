@@ -16,7 +16,6 @@ from ev3dev2.sound import Sound
 #print("Left = Run 1, Right = Run 2, Up = Run 3")
 
 sound = Sound()
-
 btn = Button()
 
 show_text("Right = Run 1, Up = Run 2, Bottom = Run 3")
