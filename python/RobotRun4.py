@@ -8,7 +8,8 @@ from ev3dev2.sensor.lego import ColorSensor, GyroSensor
 from time import sleep, time
 import math
 from BasicFunctions import *
-def robotrun3
+
+def Robotrun4()
     robot = MoveSteering(OUTPUT_A, OUTPUT_B)
     colorLeft = ColorSensor(INPUT_1)
     colorRight = ColorSensor(INPUT_3)
@@ -39,4 +40,5 @@ def robotrun3
     accelerationMoveBackward(degrees = DistanceToDegree(200), finalSpeed=100, steering=1)
 
 
+Robotrun4()
 
