@@ -7,6 +7,7 @@ from time import sleep, time
 import math
 from BasicFunctions import *
 
+#robot accelerates forward turns left and right then accelerates back to base
 def Robotrun2():
 
     robot = MoveSteering(OUTPUT_A, OUTPUT_B)
@@ -15,7 +16,7 @@ def Robotrun2():
     motorA = LargeMotor(OUTPUT_A)
     motorD = LargeMotor(OUTPUT_D)
     motorC = LargeMotor(OUTPUT_C)
-    
+
     motorC.off(brake=True)
     motorD.off(brake=True)
 
