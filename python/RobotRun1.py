@@ -10,6 +10,8 @@ import Constants
 from sys import stderr
 # from ev3dev.ev3 import *
 # import ev3dev.fonts as fonts
+#robot accelerates forward turns left and right then accelerates back to base
+
 def Robotrun1():
     robot = MoveSteering(OUTPUT_A, OUTPUT_B)
     colorLeft = ColorSensor(INPUT_1)
