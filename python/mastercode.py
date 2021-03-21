@@ -18,8 +18,10 @@ from RobotRun3 import *
 # os.system('setfont Lat15-TerminusBold32x16')
 #print("Left = Run 1, Right = Run 2, Up = Run 3")
 
+#sound and button
 sound = Sound()
 
+#creating button
 btn = Button()
 
 show_text("Up = Run 1, Right = Run 2, Bottom = Run 3")
