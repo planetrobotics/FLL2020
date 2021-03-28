@@ -20,12 +20,16 @@ def stopRobot():
     robot = MoveSteering(OUTPUT_A, OUTPUT_B)
     robot.off()
 
+#############################################################################################################
+
 def DistanceToDegree(distanceInCm, diameter = 8.16):
     """Function to calculate degrees for given distance in centimeters
         Input distanceInCm = distance to travel in centimeters
         Input diameter = wheel diameter in centimeters, 8.16 is default
     """
     return distanceInCm * (360 / (math.pi * diameter)) 
+
+#############################################################################################################
 
 def GyroDrift(gyro=GyroSensor(INPUT_2)):
     '''
@@ -40,6 +44,8 @@ def GyroDrift(gyro=GyroSensor(INPUT_2)):
         sleep(0.5) #waiting for value to change
     gyro.mode='GYRO-ANG' #reseting gyro mode for our use in other functions
 
+#############################################################################################################
+
 def GyroTurn(steering, angle, gyro = GyroSensor(INPUT_2), steer_pair = MoveSteering(OUTPUT_A, OUTPUT_B)):
     """Function to do precise turns using gyro sensor
         Input steering and angle to turn. Angle must be a +ve value
@@ -52,6 +58,8 @@ def GyroTurn(steering, angle, gyro = GyroSensor(INPUT_2), steer_pair = MoveSteer
     steer_pair.on(steering = steering, speed = 15) #starting to turn using MoveSteering. If steering equals 50 then it will do a pivot turn, if it is 100 then it will do a spin turn
     gyro.wait_until_angle_changed_by(abs(angle)) #keeps turning until the correct angle is reached
     steer_pair.off() #stopping the turning after target angle is reached
+
+#############################################################################################################
 
 def MoveLeftMotor(leftMotor = LargeMotor(OUTPUT_A), colorLeft = ColorSensor(INPUT_1)): # Function for moving the left motor for our linesquare
     while colorLeft.reflected_light_intensity > Constants.BLACK and False == Constants.STOP: #while loop for moving until it reaches the black line
@@ -79,18 +87,22 @@ def lineSquare(leftMotor = LargeMotor(OUTPUT_A),
         right = Thread(target=MoveRightMotor) # Linesquare left and right motor at the same time using thread 
         left.start() #starting the Thread
         right.start() # starting the Thread
-        left.join()
-        right.join()
+        left.join() #join so we wait for this thread to finish
+        right.join() #join so we wait for this thread to finish
         accelerationMoveBackward(steering=0, finalSpeed=20, degrees=DistanceToDegree(1)) # move backward so we can do it again for extra precision
         counter += 1
 
+#############################################################################################################
 
 def PIDMath(error, lasterror, kp = 1, ki = 0, kd = 0): # PID math function that we use for PID linefollower
+    '''PID math function that we use for PID linefollower'''
     Proportional = error * kp #Proportional value
     Integral = (error + lasterror) * ki #Integeral math
     Derivative = (error - lasterror) * kd #Derivative Math
     PID = Proportional + Integral + Derivative #Final PID value calculation
     return PID # return the final value
+
+#############################################################################################################
 
 def lineFollowTillIntersectionPID(kp = 1.0, ki = 0, kd = 0, color = ColorSensor(INPUT_1), color2 = ColorSensor(INPUT_3), 
                             robot = MoveSteering(OUTPUT_A, OUTPUT_B)):
@@ -108,7 +120,8 @@ def lineFollowTillIntersectionPID(kp = 1.0, ki = 0, kd = 0, color = ColorSensor(
         robot.on(speed = 20, steering = correction)
         lasterror = error
     robot.off()
-#############################################################################################################33
+
+#############################################################################################################
 def lineFollowPID(degrees, kp = 1.0, ki = 0, kd = 0, color = ColorSensor(INPUT_1), 
                 robot = MoveSteering(OUTPUT_A, OUTPUT_B), motorA = LargeMotor(OUTPUT_A)):
     """Function to follow line using color sensor on right side of line"""
@@ -127,6 +140,8 @@ def lineFollowPID(degrees, kp = 1.0, ki = 0, kd = 0, color = ColorSensor(INPUT_1
         robot.on(steering = correction, speed = 20)
         lasterror = error
     robot.off()
+
+#############################################################################################################
 
 def lineFollowRightPID(degrees, kp = 1.0, ki = 0, kd = 0, color = ColorSensor(INPUT_1), 
                     robot = MoveSteering(OUTPUT_A, OUTPUT_B), motorA = LargeMotor(OUTPUT_A)):
@@ -147,6 +162,7 @@ def lineFollowRightPID(degrees, kp = 1.0, ki = 0, kd = 0, color = ColorSensor(IN
         lasterror = error
     robot.off()
 
+#############################################################################################################
 
 def acceleration(degrees, finalSpeed, steering = 0, robot = MoveSteering(OUTPUT_A, OUTPUT_B), motorA = LargeMotor(OUTPUT_A)): # Function to accelerate while moving so the robot can get traction before moving fast
     """Function to accelerate the robot and drive a specific distance"""
@@ -177,7 +193,7 @@ def acceleration(degrees, finalSpeed, steering = 0, robot = MoveSteering(OUTPUT_
     
     robot.off() # Stop Moving
 
-
+#############################################################################################################
 
 def accelerationMoveBackward(degrees, finalSpeed, steering = 0, robot = MoveSteering(OUTPUT_A, OUTPUT_B), motorA = LargeMotor(OUTPUT_A)):
     motorA.reset()
@@ -196,8 +212,11 @@ def accelerationMoveBackward(degrees, finalSpeed, steering = 0, robot = MoveStee
     
     robot.off()
 
-
+#############################################################################################################
 def MoveForwardWhite(distanceInCm, colorLeft = ColorSensor(INPUT_1), robot = MoveSteering(OUTPUT_A, OUTPUT_B), motorA = LargeMotor(OUTPUT_A)):
+    '''Function to move forward until we see white. 
+    This is used for step counter mission'''
+
     deg = DistanceToDegree(distanceInCm)
     motorA.reset()
     motorA.position = 0
@@ -206,7 +225,10 @@ def MoveForwardWhite(distanceInCm, colorLeft = ColorSensor(INPUT_1), robot = Mov
         robot.on(speed=20, steering = 0)
     robot.off()
 
+#############################################################################################################
 def MoveForwardBlack(distanceInCm, colorLeft = ColorSensor(INPUT_1), robot = MoveSteering(OUTPUT_A, OUTPUT_B), motorA = LargeMotor(OUTPUT_A)):
+    '''Function to move forward until we see black. 
+    This is used for step counter mission'''
     deg = DistanceToDegree(distanceInCm)
     motorA.reset()
     motorA.position = 0
@@ -215,7 +237,11 @@ def MoveForwardBlack(distanceInCm, colorLeft = ColorSensor(INPUT_1), robot = Mov
         robot.on(speed=20, steering = 0)
     robot.off()
 
+#############################################################################################################
+#The show_text code is copied from ev3python.com
 def show_text(string, font_name='courB24', font_width=15, font_height=24): # A function to show text on the robot's screen 
+    '''Function to show a text on EV3 screen.
+    This code is copied from ev3python.com'''
     lcd = Display() # Defining screen
     lcd.clear() # Clearing the screen so there isnt already text
     strings = wrap(string, width=int(180/font_width)) #

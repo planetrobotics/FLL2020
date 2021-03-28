@@ -5,13 +5,17 @@ from threading import Thread
 from time import sleep, time
 from sys import stderr
 
+# constant values for robot Marty
 BLACK = 5
 WHITE = 25
-STOP = False
+STOP = False #STOP variable helps us to stop the robot without stopping the program
 
 btn = Button()
 
+#Stop the robot if left button is pressed
+#This stops the robot without stopping the code!
 def wait_stop_thread():
+    '''Function to set STOP = True if left button is pressed'''
     global STOP
     sound = Sound()
     while True:
@@ -21,6 +25,7 @@ def wait_stop_thread():
         sound.beep()
         sleep(1)
 
+#Stop thread runs as daemon and waits for the left button press
 stop_th = Thread(target=wait_stop_thread)
 stop_th.setDaemon(True)
 stop_th.start()
