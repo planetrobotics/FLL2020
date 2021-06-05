@@ -9,7 +9,7 @@ from time import sleep, time
 import math
 from BasicFunctions import *
 
-def Robotrun4()
+def Robotrun4():
     robot = MoveSteering(OUTPUT_A, OUTPUT_B)
     colorLeft = ColorSensor(INPUT_1)
     colorRight = ColorSensor(INPUT_3)
@@ -31,8 +31,8 @@ def Robotrun4()
     lineFollowTillIntersectionPID(kp=1.25, ki=0.01, kd=5, color=ColorSensor(INPUT_3), color2=ColorSensor(INPUT_1))
     accelerationMoveBackward(degrees = DistanceToDegree(5), finalSpeed=50, steering=0)
 
-    acceleration(degrees=DistanceToDegree(26), finalSpeed=50, steering=3)
-
+    acceleration(degrees=DistanceToDegree(22), finalSpeed=50, steering=3)
+    motorC.on_for_seconds(speed=15, seconds=5)
     motorB.on_for_seconds(speed=15, seconds=10)
 
     accelerationMoveBackward(degrees = DistanceToDegree(10), finalSpeed=20, steering=0)
@@ -41,4 +41,3 @@ def Robotrun4()
 
 
 Robotrun4()
-

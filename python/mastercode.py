@@ -24,6 +24,12 @@ sound = Sound()
 #creating button
 btn = Button()
 
+motorD = LargeMotor(OUTPUT_D)
+motorC = LargeMotor(OUTPUT_C)
+
+motorD.off()
+motorC.off()
+
 show_text("Up = Run 1, Right = Run 2, Bottom = Run 3")
 
 while True:

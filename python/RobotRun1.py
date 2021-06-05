@@ -35,7 +35,7 @@ def Robotrun1():
     #Wall square and move forward till first line intersection
     acceleration(degrees=DistanceToDegree(70), finalSpeed=50, steering=2)
     while colorLeft.reflected_light_intensity > 10 and False == Constants.STOP:
-        robot.on(steering=2, speed=20)
+        robot.on(steering=1, speed=20)
     robot.off()
 
     #Move forward towards step counter
@@ -46,7 +46,7 @@ def Robotrun1():
         #robot.on_for_degrees(speed=20, steering = 0, degrees = DistanceToDegree(2))
         #print("RobotRun2 stop=" + str(Constants.STOP), file=stderr)
         MoveForwardWhite(distanceInCm=2)
-        robot.on_for_degrees(degrees=DistanceToDegree(0.75), steering=2, speed=-10)
+        robot.on_for_degrees(degrees=DistanceToDegree(0.75), steering=1, speed=-10)
     robot.off()
 
     #Move back and forth until the left sensor encounters black
@@ -54,7 +54,7 @@ def Robotrun1():
         #robot.on_for_degrees(speed=20, steering = 0, degrees = DistanceToDegree(2))
         #print("RobotRun2 stop=" + str(Constants.STOP), file=stderr)
         MoveForwardBlack(distanceInCm=2)
-        robot.on_for_degrees(degrees=DistanceToDegree(0.75), steering=2, speed=-10)
+        robot.on_for_degrees(degrees=DistanceToDegree(0.75), steering=1, speed=-10)
     robot.off()
 
     #counter = 0
@@ -85,15 +85,21 @@ def Robotrun1():
     #doing bociaa mission
     acceleration(degrees=DistanceToDegree(22), finalSpeed=30, steering=0.5)
     motorD.on_for_seconds(speed=-25, seconds=0.5, brake=False)
+    GyroTurn(steering=50, angle=5)
+    motorC.on_for_seconds(speed=-25, seconds=0.5, brake=False)
+    motorC.on_for_seconds(speed=10, seconds=0.5, brake=True)
+    motorC.on_for_seconds(speed=-25, seconds=0.5, brake=False)
+    motorC.on_for_seconds(speed=15, seconds=0.5, brake=True)
+    GyroTurn(steering=-50, angle=5)
     #motorD.on_for_degrees(speed=30, degrees=15, brake=True)
 
     #Go backward after Boccia and then line square again
-    accelerationMoveBackward(degrees=DistanceToDegree(20), finalSpeed=30)
+    accelerationMoveBackward(degrees=DistanceToDegree(22), finalSpeed=30)
     lineSquare()
 
     #Turn towards slide and line follow until next intersection. Slide person will be knocked out by Bobby attachment
     GyroTurn(steering=-45, angle=85)
-    lineFollowPID(degrees=DistanceToDegree(18), kp=1.25, ki=0.01, kd=5, color=ColorSensor(INPUT_1))
+    lineFollowPID(degrees=DistanceToDegree(15), kp=1.25, ki=0.01, kd=5, color=ColorSensor(INPUT_1))
     acceleration(degrees=DistanceToDegree(5), finalSpeed=20)
 
     #Turn towards next line and follow the line, then square on the line near intersection
@@ -112,7 +118,7 @@ def Robotrun1():
     motorD.on_for_seconds(speed=-25, seconds=0.5, brake=False)
 
     #Turn towards bench and flatten the bench using left side arm attachement
-    GyroTurn(steering=-100, angle=90)
+    GyroTurn(steering=-100, angle=95)
     motorC.on_for_degrees(speed=-10, degrees=30, brake=True)
 
     #Turn towards home and move at 100 speed
