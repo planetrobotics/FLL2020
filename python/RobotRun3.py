@@ -50,17 +50,18 @@ def Robotrun3():
 
     #Turn right and move to Boccia target region
     GyroTurn(steering=100, angle=60)
-    acceleration(degrees=DistanceToDegree(45), finalSpeed=20)
+    acceleration(degrees=DistanceToDegree(20), finalSpeed=20)
 
     #Drop the Boccia balls in target region
-    motorD.on_for_seconds(speed=-25, seconds=0.5, brake=False)
+    #motorD.on_for_seconds(speed=-25, seconds=0.5, brake=False)
+
+    motorD.on_for_seconds(speed=20, seconds=1, brake=False)
 
     #Move backward and start robot dance
-    accelerationMoveBackward(degrees=DistanceToDegree(10), finalSpeed=30)
+    #accelerationMoveBackward(degrees=DistanceToDegree(10), finalSpeed=30)
     while Constants.STOP == False:
         GyroTurn(steering=100, angle=20)
-        GyroTurn(steering=-100, angle=20)
+        GyroTurn(steering=-70, angle=20)
 
 
 #Robotrun3() #testing, testing
-

@@ -222,7 +222,7 @@ def MoveForwardWhite(distanceInCm, colorLeft = ColorSensor(INPUT_1), robot = Mov
     motorA.position = 0
     while colorLeft.reflected_light_intensity < Constants.WHITE and motorA.position < deg and False == Constants.STOP:
         #print("stop=" + str(Constants.STOP), file=stderr)
-        robot.on(speed=25, steering = -2)
+        robot.on(speed=25, steering = 0)
     robot.off()
 
 #############################################################################################################
@@ -234,7 +234,19 @@ def MoveForwardBlack(distanceInCm, colorLeft = ColorSensor(INPUT_1), robot = Mov
     motorA.position = 0
     while colorLeft.reflected_light_intensity > Constants.BLACK and motorA.position < deg and False == Constants.STOP:
         #print("stop=" + str(Constants.STOP), file=stderr)
-        robot.on(speed=25, steering = -2)
+        robot.on(speed=25, steering = 0)
+    robot.off()
+
+############################################################################################################
+def MoveBackwardBlack(distanceInCm, colorLeft = ColorSensor(INPUT_1), robot = MoveSteering(OUTPUT_A, OUTPUT_B), motorA = LargeMotor(OUTPUT_A)):
+    '''Function to move forward until we see black. 
+    This is used for step counter mission'''
+    deg = DistanceToDegree(distanceInCm)
+    motorA.reset()
+    motorA.position = 0
+    while colorLeft.reflected_light_intensity > Constants.BLACK and motorA.position < deg and False == Constants.STOP:
+        #print("stop=" + str(Constants.STOP), file=stderr)
+        robot.on(speed=-25, steering = 0)
     robot.off()
 
 #############################################################################################################
