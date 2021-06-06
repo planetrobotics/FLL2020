@@ -121,6 +121,23 @@ def lineFollowTillIntersectionPID(kp = 1.0, ki = 0, kd = 0, color = ColorSensor(
         lasterror = error
     robot.off()
 
+def lineFollowTillIntersectionRightPID(kp = 1.0, ki = 0, kd = 0, color = ColorSensor(INPUT_1), color2 = ColorSensor(INPUT_3), 
+                            robot = MoveSteering(OUTPUT_A, OUTPUT_B)):
+    """Function to follow a line till it encounters intersection""" # *an intersection is a line that is going through the line that the robot is following
+    
+    color.mode = 'COL-REFLECT' #setting color mode
+    color2.mode = 'COL-REFLECT' #setting color mode
+    lasterror = 0 
+    while color2.reflected_light_intensity <= Constants.WHITE and False == Constants.STOP:
+        error = ((Constants.WHITE + Constants.BLACK)/2) - color.reflected_light_intensity  # colorLeft.reflected_light_intensity - colorRight.reflected_light_intensity
+        # correction = error * GAIN  # correction = PID(error, lasterror, kp, ki, kd)
+        correction = PIDMath(error=error, lasterror = lasterror, kp=kp, ki=ki, kd=kd)
+        if correction > 100: correction = 100
+        if correction < -100: correction = -100
+        robot.on(speed = 20, steering = correction)
+        lasterror = error
+    robot.off()
+
 #############################################################################################################
 def lineFollowPID(degrees, kp = 1.0, ki = 0, kd = 0, color = ColorSensor(INPUT_1), 
                 robot = MoveSteering(OUTPUT_A, OUTPUT_B), motorA = LargeMotor(OUTPUT_A)):

@@ -50,7 +50,7 @@ def Robotrun4():
     acceleration(degrees=DistanceToDegree(3), finalSpeed=50, steering=0)
     #motorC.on_for_seconds(speed=15, seconds=5)
     if False == Constants.STOP:
-        tank.on_for_seconds(left_speed=1, right_speed=20, seconds=4)
+        tank.on_for_seconds(left_speed=1.5, right_speed=20, seconds=5.5)
     #motorB.on_for_seconds(speed=15, seconds=10)
 
     accelerationMoveBackward(degrees = DistanceToDegree(15), finalSpeed=20, steering=0)
@@ -63,9 +63,9 @@ def Robotrun4():
         robot.on_for_seconds(steering=5, speed=-15, seconds=2)
 
     acceleration(degrees=DistanceToDegree(30), finalSpeed=50, steering=0)
-    GyroTurn(steering=100, angle=75)
+    GyroTurn(steering=100, angle=73)
 
-    motorC.on_for_seconds(speed=-20, seconds=2)
+    motorC.on_for_seconds(speed=-13, seconds=1.5, brake=True)
     #motorC.off(brake=False)
     sleep(0.1)
     motorC.off(brake=True)
@@ -91,9 +91,27 @@ def Robotrun4():
     lineSquare()
 
     if False == Constants.STOP:
-        GyroTurn(steering=-45, angle=85)
-    lineFollowPID(degrees=DistanceToDegree(85), kp=1.25, ki=0.01, kd=5, color=ColorSensor(INPUT_1))
+        GyroTurn(steering=-40, angle=85)
+    
+    lineFollowRightPID(degrees=DistanceToDegree(30), kp=1.25, ki=0.01, kd=5, color=colorLeft)
+    lineFollowTillIntersectionRightPID(kp=1.25, ki=0.01, kd=5, color=colorLeft, color2=colorRight)
+    lineFollowRightPID(degrees=DistanceToDegree(39), kp=1.25, ki=0.01, kd=5, color=colorLeft)
 
+    GyroTurn(steering=50, angle=20)
+    lineFollowPID(degrees=DistanceToDegree(12), kp=1.25, ki=0.01, kd=5, color=colorLeft)
+    lineSquare()
+
+    GyroTurn(steering=100, angle=80)
+    motorC.on_for_seconds(speed=-10, seconds=1, brake=False)
+    acceleration(degrees=DistanceToDegree(7), finalSpeed=30, steering=0)
+    motorC.on_for_seconds(speed=10, seconds=2, brake=True)
+    GyroTurn(steering=50, angle=75)
+
+    while Constants.STOP == False:
+        GyroTurn(steering=100, angle=20)
+        GyroTurn(steering=-70, angle=20)
+
+    return
     if False == Constants.STOP:
         GyroTurn(steering=-50, angle=20)
     acceleration(degrees=DistanceToDegree(100), finalSpeed=100, steering=0)
