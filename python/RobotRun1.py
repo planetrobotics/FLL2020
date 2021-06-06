@@ -78,7 +78,7 @@ def Robotrun1():
     robot.on_for_seconds(steering=5, speed=-10, seconds=1.5)
 
     #Go under pullup bar and then line square
-    acceleration(degrees=DistanceToDegree(56), finalSpeed=30, steering=-2)
+    acceleration(degrees=DistanceToDegree(56), finalSpeed=40, steering=-.8)
     #lineFollowPID(degrees=DistanceToDegree(40), kp=1.25, ki=0.01, kd=5, color=ColorSensor(INPUT_3))
     lineSquare()
 
@@ -97,7 +97,7 @@ def Robotrun1():
     accelerationMoveBackward(degrees=DistanceToDegree(22), finalSpeed=30)
     lineSquare()
 
-    #Turn towards slide and line follow until next intersection. Slide person will be knocked out by Bobby attachment
+    #Turn towards slide and line follow until next intersection. Slide person will become dead by Bobby attachment
     GyroTurn(steering=-45, angle=85)
     lineFollowPID(degrees=DistanceToDegree(15), kp=1.25, ki=0.01, kd=5, color=ColorSensor(INPUT_1))
     acceleration(degrees=DistanceToDegree(5), finalSpeed=20)
@@ -105,7 +105,7 @@ def Robotrun1():
     #Turn towards next line and follow the line, then square on the line near intersection
     GyroTurn(steering=50, angle=20)
     #motorD.on_for_degrees(speed=30, degrees=15, brake=True)
-    lineFollowPID(degrees=DistanceToDegree(12), kp=1.25, ki=0.01, kd=5, color=ColorSensor(INPUT_1))
+    lineFollowPID(degrees=DistanceToDegree(11), kp=1.25, ki=0.01, kd=5, color=ColorSensor(INPUT_1))
     lineSquare()
     acceleration(degrees=DistanceToDegree(5), finalSpeed=20, steering=5)
     lineFollowPID(degrees=DistanceToDegree(30), kp=1.25, ki=0.01, kd=5, color=ColorSensor(INPUT_1))

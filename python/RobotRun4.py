@@ -29,6 +29,8 @@ def Robotrun4():
 
     show_text("Robot Run 2")
 
+    motorC.off(brake=True)
+
     #GyroTurn(steering=-50, angle=5)
     acceleration(degrees=DistanceToDegree(30), finalSpeed=30)
     lineFollowPID(degrees=DistanceToDegree(30), kp=1.25, ki=0.01, kd=5, color=ColorSensor(INPUT_3))
@@ -37,7 +39,7 @@ def Robotrun4():
     motorC.on_for_seconds(speed=15, seconds=1, brake=False)
     GyroTurn(steering=50, angle=20)
     acceleration(degrees=DistanceToDegree(20), finalSpeed=30)
-    GyroTurn(steering=-55, angle=20)
+    GyroTurn(steering=-55, angle=22)
     acceleration(degrees=DistanceToDegree(10), finalSpeed=30)
 
     lineFollowPID(degrees=DistanceToDegree(15), kp=1.25, ki=0.01, kd=5, color=ColorSensor(INPUT_3))
@@ -48,14 +50,14 @@ def Robotrun4():
     accelerationMoveBackward(degrees = DistanceToDegree(5), finalSpeed=50, steering=0)
     
 
-    acceleration(degrees=DistanceToDegree(22), finalSpeed=50, steering=3)
+    acceleration(degrees=DistanceToDegree(22), finalSpeed=50, steering=2)
     acceleration(degrees=DistanceToDegree(3), finalSpeed=50, steering=0)
     #motorC.on_for_seconds(speed=15, seconds=5)
     if False == Constants.STOP:
-        tank.on_for_seconds(left_speed=1.5, right_speed=20, seconds=5.5)
+        tank.on_for_seconds(left_speed=1, right_speed=20, seconds=4.5)
     #motorB.on_for_seconds(speed=15, seconds=10)
 
-    accelerationMoveBackward(degrees = DistanceToDegree(15), finalSpeed=20, steering=0)
+    accelerationMoveBackward(degrees = DistanceToDegree(12), finalSpeed=20, steering=0)
 
     GyroTurn(steering=-50, angle=gyro.angle)
     MoveBackwardBlack(10)
@@ -64,6 +66,7 @@ def Robotrun4():
     if False == Constants.STOP:
         robot.on_for_seconds(steering=5, speed=-15, seconds=2)
 
+    # moving towards row machine
     acceleration(degrees=DistanceToDegree(30), finalSpeed=50, steering=0)
     GyroTurn(steering=100, angle=73)
 
@@ -76,19 +79,21 @@ def Robotrun4():
     accelerationMoveBackward(degrees = DistanceToDegree(10), finalSpeed=20, steering=0)
     GyroTurn(steering=-100, angle=5)
 
+    #DOING Row Machine
     if False == Constants.STOP:
         motorC.on_for_seconds(speed=20, seconds=2)
         GyroTurn(steering=-100, angle=65)
     acceleration(degrees=DistanceToDegree(27), finalSpeed=50, steering=0)
     lineSquare()
 
-    GyroTurn(steering=100, angle=10)
+    #Moving towards weight machine
+    GyroTurn(steering=100, angle=3)
     acceleration(degrees=DistanceToDegree(22), finalSpeed=30, steering=0)
 
     if False == Constants.STOP:
         motorD.on_for_degrees(speed=-20, degrees=150)
         motorD.on_for_seconds(speed=20, seconds=2, brake=False)
-        GyroTurn(steering=-100, angle=10)
+        GyroTurn(steering=-100, angle=3)
     accelerationMoveBackward(degrees = DistanceToDegree(20), finalSpeed=20, steering=0)
     lineSquare()
 
@@ -100,7 +105,7 @@ def Robotrun4():
     lineFollowRightPID(degrees=DistanceToDegree(39), kp=1.25, ki=0.01, kd=5, color=colorLeft)
 
     GyroTurn(steering=50, angle=20)
-    lineFollowPID(degrees=DistanceToDegree(12), kp=1.25, ki=0.01, kd=5, color=colorLeft)
+    acceleration(degrees=DistanceToDegree(12), finalSpeed=30, steering=2)
     lineSquare()
 
     GyroTurn(steering=100, angle=75)
@@ -112,11 +117,6 @@ def Robotrun4():
     while Constants.STOP == False:
         GyroTurn(steering=100, angle=20)
         GyroTurn(steering=-70, angle=20)
-
-    return
-    if False == Constants.STOP:
-        GyroTurn(steering=-50, angle=20)
-    acceleration(degrees=DistanceToDegree(100), finalSpeed=100, steering=0)
 
     motorC.off(brake=False)
     motorD.off(brake=False)
