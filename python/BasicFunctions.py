@@ -239,7 +239,7 @@ def MoveForwardWhite(distanceInCm, colorLeft = ColorSensor(INPUT_1), robot = Mov
     motorA.position = 0
     while colorLeft.reflected_light_intensity < Constants.WHITE and motorA.position < deg and False == Constants.STOP:
         #print("stop=" + str(Constants.STOP), file=stderr)
-        robot.on(speed=25, steering = 0)
+        robot.on(speed=25, steering = 1)
     robot.off()
 
 #############################################################################################################
@@ -251,7 +251,7 @@ def MoveForwardBlack(distanceInCm, colorLeft = ColorSensor(INPUT_1), robot = Mov
     motorA.position = 0
     while colorLeft.reflected_light_intensity > Constants.BLACK and motorA.position < deg and False == Constants.STOP:
         #print("stop=" + str(Constants.STOP), file=stderr)
-        robot.on(speed=25, steering = 0)
+        robot.on(speed=25, steering = 1)
     robot.off()
 
 ############################################################################################################

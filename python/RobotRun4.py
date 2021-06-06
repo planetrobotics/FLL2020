@@ -21,6 +21,8 @@ def Robotrun4():
     motorB = LargeMotor(OUTPUT_B)
     motorA = LargeMotor(OUTPUT_A)
 
+    Constants.STOP = False
+
     gyro.reset()
 
     GyroDrift()
@@ -72,7 +74,7 @@ def Robotrun4():
     acceleration(degrees=DistanceToDegree(1), finalSpeed=20, steering=0)
 
     accelerationMoveBackward(degrees = DistanceToDegree(10), finalSpeed=20, steering=0)
-    GyroTurn(steering=-100, angle=10)
+    GyroTurn(steering=-100, angle=5)
 
     if False == Constants.STOP:
         motorC.on_for_seconds(speed=20, seconds=2)
@@ -101,7 +103,7 @@ def Robotrun4():
     lineFollowPID(degrees=DistanceToDegree(12), kp=1.25, ki=0.01, kd=5, color=colorLeft)
     lineSquare()
 
-    GyroTurn(steering=100, angle=80)
+    GyroTurn(steering=100, angle=75)
     motorC.on_for_seconds(speed=-10, seconds=1, brake=False)
     acceleration(degrees=DistanceToDegree(7), finalSpeed=30, steering=0)
     motorC.on_for_seconds(speed=10, seconds=2, brake=True)

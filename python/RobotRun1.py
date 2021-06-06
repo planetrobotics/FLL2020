@@ -46,7 +46,7 @@ def Robotrun1():
         #robot.on_for_degrees(speed=20, steering = 0, degrees = DistanceToDegree(2))
         #print("RobotRun2 stop=" + str(Constants.STOP), file=stderr)
         MoveForwardWhite(distanceInCm=2)
-        robot.on_for_degrees(degrees=DistanceToDegree(0.75), steering=1, speed=-10)
+        robot.on_for_degrees(degrees=DistanceToDegree(0.75), steering=-1, speed=-13)
     robot.off()
 
     #Move back and forth until the left sensor encounters black
@@ -54,31 +54,31 @@ def Robotrun1():
         #robot.on_for_degrees(speed=20, steering = 0, degrees = DistanceToDegree(2))
         #print("RobotRun2 stop=" + str(Constants.STOP), file=stderr)
         MoveForwardBlack(distanceInCm=2)
-        robot.on_for_degrees(degrees=DistanceToDegree(0.75), steering=1, speed=-10)
+        robot.on_for_degrees(degrees=DistanceToDegree(0.75), steering=-1, speed=-13)
     robot.off()
 
     #counter = 0
     #while counter < 5 and False == Constants.STOP:
     #    robot.on_for_degrees(speed=20, steering = 0, degrees = DistanceToDegree(2))
-    #    robot.on_for_degrees(degrees=DistanceToDegree(0.75), steering=2, speed=-10)
+    #    robot.on_for_degrees(degrees=DistanceToDegree(0.75), steering=-1, speed=-15)
     #    counter += 1
     #robot.off()
 
     #Series of movements to turn left after step counter mission and then wall square to align with pullup bar
-    accelerationMoveBackward(degrees=DistanceToDegree(10), steering=-15, finalSpeed=-20)
+    accelerationMoveBackward(degrees=DistanceToDegree(12), steering=-15, finalSpeed=-20)
     GyroTurn(steering=-100, angle=40)
     acceleration(degrees=DistanceToDegree(10.5), finalSpeed=20)
     while colorRight.reflected_light_intensity < Constants.WHITE and False == Constants.STOP:
-        robot.on(speed=10, steering=0)
+        robot.on(speed=10, steering=-1)
     robot.off()
     acceleration(degrees=DistanceToDegree(2), finalSpeed=20)
     GyroTurn(steering=-100, angle=50)
 
     # wall square
-    robot.on_for_seconds(steering=5, speed=-10, seconds=2)
+    robot.on_for_seconds(steering=5, speed=-10, seconds=1.5)
 
     #Go under pullup bar and then line square
-    acceleration(degrees=DistanceToDegree(55), finalSpeed=30)
+    acceleration(degrees=DistanceToDegree(56), finalSpeed=30, steering=-2)
     #lineFollowPID(degrees=DistanceToDegree(40), kp=1.25, ki=0.01, kd=5, color=ColorSensor(INPUT_3))
     lineSquare()
 
@@ -129,4 +129,4 @@ def Robotrun1():
     motorD.off(brake=False)
 
     
-#Robotrun1() #testing, testing
+Robotrun1() #testing, testing
