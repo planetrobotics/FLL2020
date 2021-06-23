@@ -27,6 +27,8 @@ def Robotrun4():
 
     GyroDrift()
 
+    gyro.reset
+
     show_text("Robot Run 2")
 
     motorC.off(brake=True)
@@ -122,3 +124,4 @@ def Robotrun4():
     motorD.off(brake=False)
 
 #Robotrun4()
+ 

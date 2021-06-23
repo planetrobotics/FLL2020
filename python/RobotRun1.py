@@ -46,7 +46,7 @@ def Robotrun1():
         #robot.on_for_degrees(speed=20, steering = 0, degrees = DistanceToDegree(2))
         #print("RobotRun2 stop=" + str(Constants.STOP), file=stderr)
         MoveForwardWhite(distanceInCm=2)
-        robot.on_for_degrees(degrees=DistanceToDegree(0.75), steering=-1, speed=-13)
+        robot.on_for_degrees(degrees=DistanceToDegree(0.9), steering=-1, speed=-8)
     robot.off()
 
     #Move back and forth until the left sensor encounters black
@@ -54,7 +54,7 @@ def Robotrun1():
         #robot.on_for_degrees(speed=20, steering = 0, degrees = DistanceToDegree(2))
         #print("RobotRun2 stop=" + str(Constants.STOP), file=stderr)
         MoveForwardBlack(distanceInCm=2)
-        robot.on_for_degrees(degrees=DistanceToDegree(0.75), steering=-1, speed=-13)
+        robot.on_for_degrees(degrees=DistanceToDegree(0.9), steering=-1, speed=-8)
     robot.off()
 
     #counter = 0
@@ -85,9 +85,11 @@ def Robotrun1():
     #doing bociaa mission
     acceleration(degrees=DistanceToDegree(22), finalSpeed=30, steering=0.5)
     motorD.on_for_seconds(speed=-25, seconds=0.5, brake=False)
+    motorD.on_for_seconds(speed=15, seconds=0.25, brake=False)
+    motorD.on_for_seconds(speed=-25, seconds=0.25, brake=False)
     GyroTurn(steering=50, angle=5)
     motorC.on_for_seconds(speed=-25, seconds=0.5, brake=False)
-    motorC.on_for_seconds(speed=10, seconds=0.5, brake=True)
+    motorC.on_for_seconds(speed=15, seconds=0.5, brake=True)
     motorC.on_for_seconds(speed=-25, seconds=0.5, brake=False)
     motorC.on_for_seconds(speed=15, seconds=0.5, brake=True)
     GyroTurn(steering=-50, angle=5)
@@ -108,25 +110,27 @@ def Robotrun1():
     lineFollowPID(degrees=DistanceToDegree(11), kp=1.25, ki=0.01, kd=5, color=ColorSensor(INPUT_1))
     lineSquare()
     acceleration(degrees=DistanceToDegree(5), finalSpeed=20, steering=5)
-    lineFollowPID(degrees=DistanceToDegree(30), kp=1.25, ki=0.01, kd=5, color=ColorSensor(INPUT_1))
+    lineFollowPID(degrees=DistanceToDegree(25), kp=1.25, ki=0.01, kd=5, color=ColorSensor(INPUT_1))
 
     #Turn towards basketball
     GyroTurn(steering=100, angle=40)
+    acceleration(degrees=DistanceToDegree(3), finalSpeed=20, steering=5)
 
     #Lift the basket using right side arm attachment
-    motorD.on_for_seconds(speed=20, seconds=0.5, brake=True)
+    motorD.on_for_seconds(speed=26, seconds=0.4, brake=True)
     motorD.on_for_seconds(speed=-25, seconds=0.5, brake=False)
 
     #Turn towards bench and flatten the bench using left side arm attachement
-    GyroTurn(steering=-100, angle=95)
+    GyroTurn(steering=-100, angle=80)
+    acceleration(degrees=DistanceToDegree(5), finalSpeed=50, steering=0)
     motorC.on_for_degrees(speed=-10, degrees=30, brake=True)
 
     #Turn towards home and move at 100 speed
-    GyroTurn(steering=100, angle=50)
+    GyroTurn(steering=100, angle=35)
     acceleration(degrees=DistanceToDegree(70), finalSpeed=100, steering=0)
 
     motorC.off(brake=False)
     motorD.off(brake=False)
-
+ 
     
 #Robotrun1() #testing, testing
