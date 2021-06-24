@@ -115,10 +115,12 @@ def Robotrun4():
     acceleration(degrees=DistanceToDegree(7), finalSpeed=30, steering=0)
     motorC.on_for_seconds(speed=10, seconds=2, brake=True)
     GyroTurn(steering=50, angle=75)
+    motorD.on_for_seconds(degrees)
+
 
     while Constants.STOP == False:
-        GyroTurn(steering=100, angle=20)
-        GyroTurn(steering=-70, angle=20)
+        acceleration(degrees=DistanceToDegree(3), finalSpeed=30, steering=0)
+        accelerationMoveBackward(degrees = DistanceToDegree(3), finalSpeed=30, steering=0)
 
     motorC.off(brake=False)
     motorD.off(brake=False)
