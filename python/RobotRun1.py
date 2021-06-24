@@ -46,7 +46,7 @@ def Robotrun1():
         #robot.on_for_degrees(speed=20, steering = 0, degrees = DistanceToDegree(2))
         #print("RobotRun2 stop=" + str(Constants.STOP), file=stderr)
         MoveForwardWhite(distanceInCm=2)
-        robot.on_for_degrees(degrees=DistanceToDegree(0.9), steering=-1, speed=-8)
+        robot.on_for_degrees(degrees=DistanceToDegree(1.5), steering=-1, speed=-8)
     robot.off()
 
     #Move back and forth until the left sensor encounters black
@@ -54,7 +54,7 @@ def Robotrun1():
         #robot.on_for_degrees(speed=20, steering = 0, degrees = DistanceToDegree(2))
         #print("RobotRun2 stop=" + str(Constants.STOP), file=stderr)
         MoveForwardBlack(distanceInCm=2)
-        robot.on_for_degrees(degrees=DistanceToDegree(0.9), steering=-1, speed=-8)
+        robot.on_for_degrees(degrees=DistanceToDegree(1.5), steering=-1, speed=-8)
     robot.off()
 
     #counter = 0
@@ -89,8 +89,8 @@ def Robotrun1():
     motorD.on_for_seconds(speed=-25, seconds=0.25, brake=False)
     GyroTurn(steering=50, angle=5)
     motorC.on_for_seconds(speed=-25, seconds=0.5, brake=False)
-    motorC.on_for_seconds(speed=15, seconds=0.5, brake=True)
-    motorC.on_for_seconds(speed=-25, seconds=0.5, brake=False)
+    motorC.on_for_seconds(speed=15, seconds=0.25, brake=True)
+    motorC.on_for_seconds(speed=-35, seconds=0.20, brake=False)
     motorC.on_for_seconds(speed=15, seconds=0.5, brake=True)
     GyroTurn(steering=-50, angle=5)
     #motorD.on_for_degrees(speed=30, degrees=15, brake=True)
@@ -123,7 +123,8 @@ def Robotrun1():
     #Turn towards bench and flatten the bench using left side arm attachement
     GyroTurn(steering=-100, angle=80)
     acceleration(degrees=DistanceToDegree(5), finalSpeed=50, steering=0)
-    motorC.on_for_degrees(speed=-10, degrees=30, brake=True)
+    motorC.on_for_degrees(speed=-10, degrees=50, brake=True)
+    motorC.on_for_degrees(speed=10, degrees=50, brake=True)
 
     #Turn towards home and move at 100 speed
     GyroTurn(steering=100, angle=35)

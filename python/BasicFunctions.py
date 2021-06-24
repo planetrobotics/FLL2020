@@ -139,7 +139,7 @@ def lineFollowTillIntersectionRightPID(kp = 1.0, ki = 0, kd = 0, color = ColorSe
     robot.off()
 
 #############################################################################################################
-def lineFollowPID(degrees, kp = 1.0, ki = 0, kd = 0, color = ColorSensor(INPUT_1), 
+def lineFollowPID(degrees, lspeed=20, kp = 1.0, ki = 0, kd = 0, color = ColorSensor(INPUT_1), 
                 robot = MoveSteering(OUTPUT_A, OUTPUT_B), motorA = LargeMotor(OUTPUT_A)):
     """Function to follow line using color sensor on right side of line"""
 
@@ -154,7 +154,7 @@ def lineFollowPID(degrees, kp = 1.0, ki = 0, kd = 0, color = ColorSensor(INPUT_1
         correction = PIDMath(error=error, lasterror = lasterror, kp=kp, ki=ki, kd=kd)
         if correction > 100: correction = 100
         if correction < -100: correction = -100
-        robot.on(steering = correction, speed = 20)
+        robot.on(steering = correction, speed = lspeed)
         lasterror = error
     robot.off()
 
