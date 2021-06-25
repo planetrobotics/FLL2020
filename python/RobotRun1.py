@@ -45,7 +45,9 @@ def Robotrun1():
     while colorLeft.reflected_light_intensity < Constants.WHITE and False == Constants.STOP:
         #robot.on_for_degrees(speed=20, steering = 0, degrees = DistanceToDegree(2))
         #print("RobotRun2 stop=" + str(Constants.STOP), file=stderr)
-        MoveForwardWhite(distanceInCm=2)
+        MoveForwardWhite(distanceInCm=3)
+        if colorLeft.reflected_light_intensity >= Constants.WHITE:
+            break
         robot.on_for_degrees(degrees=DistanceToDegree(1.5), steering=-1, speed=-8)
     robot.off()
 
@@ -53,7 +55,9 @@ def Robotrun1():
     while colorLeft.reflected_light_intensity > Constants.BLACK and False == Constants.STOP:
         #robot.on_for_degrees(speed=20, steering = 0, degrees = DistanceToDegree(2))
         #print("RobotRun2 stop=" + str(Constants.STOP), file=stderr)
-        MoveForwardBlack(distanceInCm=2)
+        MoveForwardBlack(distanceInCm=3)
+        if colorLeft.reflected_light_intensity <= Constants.BLACK:
+            break
         robot.on_for_degrees(degrees=DistanceToDegree(1.5), steering=-1, speed=-8)
     robot.off()
 
@@ -72,13 +76,16 @@ def Robotrun1():
         robot.on(speed=10, steering=-1)
     robot.off()
     acceleration(degrees=DistanceToDegree(2), finalSpeed=20)
-    GyroTurn(steering=-100, angle=50)
+    GyroTurn(steering=-100, angle=60)
 
     # wall square
-    robot.on_for_seconds(steering=5, speed=-10, seconds=1.5)
+    robot.on_for_seconds(steering=0, speed=-5, seconds=2, brake=False)
+
+    #acceleration(degrees=DistanceToDegree(5), finalSpeed=20, steering=0)
+    #lineSquare()
 
     #Go under pullup bar and then line square
-    acceleration(degrees=DistanceToDegree(56), finalSpeed=40, steering=-.8)
+    acceleration(degrees=DistanceToDegree(56), finalSpeed=40, steering=-1)
     #lineFollowPID(degrees=DistanceToDegree(40), kp=1.25, ki=0.01, kd=5, color=ColorSensor(INPUT_3))
     lineSquare()
 
@@ -121,9 +128,10 @@ def Robotrun1():
     motorD.on_for_seconds(speed=-25, seconds=0.5, brake=False)
 
     #Turn towards bench and flatten the bench using left side arm attachement
-    GyroTurn(steering=-100, angle=80)
-    acceleration(degrees=DistanceToDegree(5), finalSpeed=50, steering=0)
+    GyroTurn(steering=-100, angle=90)
+    #acceleration(degrees=DistanceToDegree(5), finalSpeed=50, steering=0)
     motorC.on_for_degrees(speed=-10, degrees=50, brake=True)
+    GyroTurn(steering=100, angle=5)
     motorC.on_for_degrees(speed=10, degrees=50, brake=True)
 
     #Turn towards home and move at 100 speed

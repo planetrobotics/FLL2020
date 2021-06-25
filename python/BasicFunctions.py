@@ -111,6 +111,7 @@ def lineFollowTillIntersectionPID(kp = 1.0, ki = 0, kd = 0, color = ColorSensor(
     color.mode = 'COL-REFLECT' #setting color mode
     color2.mode = 'COL-REFLECT' #setting color mode
     lasterror = 0 
+    sound = Sound()
     while color2.reflected_light_intensity <= Constants.WHITE and False == Constants.STOP:
         error = color.reflected_light_intensity - ((Constants.WHITE + Constants.BLACK)/2)  # colorLeft.reflected_light_intensity - colorRight.reflected_light_intensity
         # correction = error * GAIN  # correction = PID(error, lasterror, kp, ki, kd)
@@ -119,6 +120,7 @@ def lineFollowTillIntersectionPID(kp = 1.0, ki = 0, kd = 0, color = ColorSensor(
         if correction < -100: correction = -100
         robot.on(speed = 20, steering = correction)
         lasterror = error
+    sound.beep()
     robot.off()
 
 def lineFollowTillIntersectionRightPID(kp = 1.0, ki = 0, kd = 0, color = ColorSensor(INPUT_1), color2 = ColorSensor(INPUT_3), 
@@ -128,6 +130,7 @@ def lineFollowTillIntersectionRightPID(kp = 1.0, ki = 0, kd = 0, color = ColorSe
     color.mode = 'COL-REFLECT' #setting color mode
     color2.mode = 'COL-REFLECT' #setting color mode
     lasterror = 0 
+    sound = Sound()
     while color2.reflected_light_intensity <= Constants.WHITE and False == Constants.STOP:
         error = ((Constants.WHITE + Constants.BLACK)/2) - color.reflected_light_intensity  # colorLeft.reflected_light_intensity - colorRight.reflected_light_intensity
         # correction = error * GAIN  # correction = PID(error, lasterror, kp, ki, kd)
@@ -136,6 +139,7 @@ def lineFollowTillIntersectionRightPID(kp = 1.0, ki = 0, kd = 0, color = ColorSe
         if correction < -100: correction = -100
         robot.on(speed = 20, steering = correction)
         lasterror = error
+    sound.beep()
     robot.off()
 
 #############################################################################################################
@@ -239,7 +243,7 @@ def MoveForwardWhite(distanceInCm, colorLeft = ColorSensor(INPUT_1), robot = Mov
     motorA.position = 0
     while colorLeft.reflected_light_intensity < Constants.WHITE and motorA.position < deg and False == Constants.STOP:
         #print("stop=" + str(Constants.STOP), file=stderr)
-        robot.on(speed=25, steering = 1)
+        robot.on(speed=20, steering = 1)
     robot.off()
 
 #############################################################################################################
@@ -251,7 +255,7 @@ def MoveForwardBlack(distanceInCm, colorLeft = ColorSensor(INPUT_1), robot = Mov
     motorA.position = 0
     while colorLeft.reflected_light_intensity > Constants.BLACK and motorA.position < deg and False == Constants.STOP:
         #print("stop=" + str(Constants.STOP), file=stderr)
-        robot.on(speed=25, steering = 1)
+        robot.on(speed=20, steering = 1)
     robot.off()
 
 ############################################################################################################

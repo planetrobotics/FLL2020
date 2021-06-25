@@ -7,7 +7,7 @@ from sys import stderr
 
 # constant values for robot Marty
 BLACK = 5
-WHITE = 25
+WHITE = 24
 STOP = False #STOP variable helps us to stop the robot without stopping the program
 
 btn = Button()

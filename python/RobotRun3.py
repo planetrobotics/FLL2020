@@ -60,8 +60,8 @@ def Robotrun3():
     #Move backward and start robot dance
     #accelerationMoveBackward(degrees=DistanceToDegree(10), finalSpeed=30)
     while Constants.STOP == False:
-        GyroTurn(steering=100, angle=20)
-        GyroTurn(steering=-70, angle=20)
+        acceleration(degrees=DistanceToDegree(3), finalSpeed=31, steering=0)
+        accelerationMoveBackward(degrees = DistanceToDegree(3), finalSpeed=30, steering=0)
 
 
 #Robotrun3() #testing, testing
