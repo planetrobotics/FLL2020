@@ -61,14 +61,19 @@ def Robotrun4():
 
     acceleration(degrees=DistanceToDegree(12), finalSpeed=50, steering=2.5)
 
-    acceleration(degrees=DistanceToDegree(10), finalSpeed=45, steering=4)
+    motorC.on_for_degrees(speed=-25, degrees=150, brake=True)
+    motorD.on_for_degrees(speed=-25, degrees=150, brake=True)
+
+    acceleration(degrees=DistanceToDegree(12), finalSpeed=45, steering=4)
     #acceleration(degrees=DistanceToDegree(12), finalSpeed=45, steering=5)
-    #motorC.on_for_seconds(speed=15, seconds=5)
 
     #Moving treadmill
     if False == Constants.STOP:
         tank.on_for_seconds(left_speed=1, right_speed=20, seconds=5.5)
     #motorB.on_for_seconds(speed=15, seconds=10)
+
+    motorC.on_for_seconds(speed=25, seconds=2, brake=False)
+    motorD.on_for_seconds(speed=25, seconds=2, brake=False)
 
     accelerationMoveBackward(degrees = DistanceToDegree(5), finalSpeed=20, steering=0)
     while colorLeft.reflected_light_intensity < Constants.WHITE:
@@ -77,7 +82,10 @@ def Robotrun4():
 
     GyroTurn(steering=-50, angle=gyro.angle)
     MoveBackwardBlack(10)
-    GyroTurn(steering=-100, angle=75)
+
+    ang = -1 * (90 + gyro.angle)
+    GyroTurn(steering=-100, angle=ang)
+
     # wall square
     if False == Constants.STOP:
         robot.on_for_seconds(steering=5, speed=-10, seconds=2.7, brake=False)
@@ -101,17 +109,17 @@ def Robotrun4():
     if False == Constants.STOP:
         motorC.on_for_seconds(speed=20, seconds=2)
         ang = 90 + gyro.angle
-        GyroTurn(steering=-100, angle=50)
+        GyroTurn(steering=-100, angle=ang)
     
     acceleration(degrees=DistanceToDegree(28), finalSpeed=50, steering=0)
     lineSquare()
 
     #Moving towards weight machine
-    #GyroTurn(steering=100, angle=2)
+    GyroTurn(steering=100, angle=3)
     acceleration(degrees=DistanceToDegree(22), finalSpeed=30, steering=0)
 
     if False == Constants.STOP:
-        motorD.on_for_degrees(speed=-20, degrees=150)
+        motorD.on_for_degrees(speed=-20, degrees=160)
         motorD.on_for_seconds(speed=20, seconds=2, brake=True)
         #GyroTurn(steering=-100, angle=7)
     accelerationMoveBackward(degrees = DistanceToDegree(20), finalSpeed=20, steering=0)
